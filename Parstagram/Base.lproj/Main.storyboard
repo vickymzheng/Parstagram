@@ -69,6 +69,7 @@
                     <connections>
                         <outlet property="passwordField" destination="ev6-bO-YU0" id="ew6-x7-B4b"/>
                         <outlet property="usernameField" destination="981-2C-8DG" id="3BM-ak-cet"/>
+                        <segue destination="e22-vn-yyv" kind="presentation" identifier="loginSegue" id="pyN-pU-iZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -80,7 +81,7 @@
             <objects>
                 <viewController id="2s5-29-Z1q" customClass="FeedViewController" customModule="Parstagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ODQ-Ig-Drg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="v6W-CF-Ioc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -97,7 +98,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e22-vn-yyv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9J1-QO-wzT">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
