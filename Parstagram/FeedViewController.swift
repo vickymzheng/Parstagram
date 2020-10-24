@@ -13,23 +13,47 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var feedTableView: UITableView!
     var posts = [PFObject]()
+    var count = 20
+    
+    let myRefreshControl = UIRefreshControl();
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         feedTableView.delegate = self
         feedTableView.dataSource = self
+        
+        myRefreshControl.addTarget(self, action: #selector(loadPosts), for: .valueChanged)
+        feedTableView.refreshControl = myRefreshControl
 
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        loadPosts()
+    }
+    
+    @objc func loadPosts() {
         let query = PFQuery(className:"Posts")
         query.includeKey("author")
-        query.limit = 20
+        query.limit = self.count
         
+        query.findObjectsInBackground { (posts, error) in
+            if (posts != nil) {
+                self.posts = posts!
+                self.feedTableView.reloadData()
+                self.myRefreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    @objc func loadMorePosts() {
+        let query = PFQuery(className:"Posts")
+        query.includeKey("author")
+        self.count+=20
+        query.limit = self.count
         query.findObjectsInBackground { (posts, error) in
             if (posts != nil) {
                 self.posts = posts!
@@ -37,6 +61,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == posts.count {
+            loadMorePosts()
+        }
+    }
+    
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
